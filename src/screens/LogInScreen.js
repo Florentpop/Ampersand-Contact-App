@@ -133,9 +133,9 @@ const styles = StyleSheet.create({
   },
 
   image: {
-    height: 300,
+    height: 400,
     width: "100%",
-    flex: 0.5,
+    flex: 0.8,
     marginBottom: 50,
   },
   buttonContainer: {
