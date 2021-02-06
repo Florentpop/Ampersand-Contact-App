@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -7,17 +7,66 @@ import {
   Image,
   TextInput,
   ScrollView,
+  ImageBackground,
+  Button,
 } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import * as ImagePicker from "expo-image-picker";
 
 export default function RegisterScreen({ route, navigation }) {
   let RegisterScreen = route.params;
+
+  const [image, setImage] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      if (Platform.OS !== "web") {
+        const {
+          status,
+        } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== "granted") {
+          alert("Sorry, we need camera roll permissions to make this work!");
+        }
+      }
+    })();
+  }, []);
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.cancelled) {
+      setImage(result.uri);
+    }
+  };
+
   return (
-    <ScrollView style={styles.mainContainer}>
-      <Image
-        source={require("../../assets/profile.jpg")}
-        style={styles.image}
-      />
+    <ScrollView style={styles.container}>
+      <View
+        style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+        style={styles.frame}
+      >
+        <Button
+          title="Pick from Image Library"
+          onPress={pickImage}
+          style={styles.image}
+        />
+        {image && (
+          <Image
+            source={{ uri: image }}
+            style={{
+              width: 150,
+              height: 150,
+              borderRadius: 75,
+            }}
+          />
+        )}
+      </View>
 
       <View
         style={{
@@ -26,25 +75,15 @@ export default function RegisterScreen({ route, navigation }) {
           justifyContent: "space-between",
         }}
       >
-        <Text style={{ fontWeight: "bold", marginBottom: 10, marginLeft: 15 }}>
-          Full Name
-        </Text>
+        <Text style={styles.textName}>Full Name</Text>
         <TextInput
-          style={{ marginRight: 20, marginBottom: 10 }}
+          style={styles.textInput}
           placeholderTextColor="#aaaaaa"
           placeholder="Florent Francis"
         />
       </View>
 
-      <View
-        style={{
-          backgroundColor: "#e6e7e8",
-          height: 2,
-          width: 330,
-          marginBottom: 20,
-          marginLeft: 15,
-        }}
-      ></View>
+      <View style={styles.line}></View>
 
       <View
         style={{
@@ -53,26 +92,16 @@ export default function RegisterScreen({ route, navigation }) {
           justifyContent: "space-between",
         }}
       >
-        <Text style={{ fontWeight: "bold", marginBottom: 10, marginLeft: 15 }}>
-          Email
-        </Text>
+        <Text style={styles.textName}>Email</Text>
         <TextInput
-          style={{ marginRight: 20, marginBottom: 10 }}
+          style={styles.textInput}
           placeholderTextColor="#aaaaaa"
           placeholder="florentpop@gmail.com"
           secureTextEntry={true}
         />
       </View>
 
-      <View
-        style={{
-          backgroundColor: "#e6e7e8",
-          height: 2,
-          width: 330,
-          marginBottom: 20,
-          marginLeft: 15,
-        }}
-      ></View>
+      <View style={styles.line}></View>
 
       <View
         style={{
@@ -81,26 +110,16 @@ export default function RegisterScreen({ route, navigation }) {
           justifyContent: "space-between",
         }}
       >
-        <Text style={{ fontWeight: "bold", marginBottom: 10, marginLeft: 15 }}>
-          Phone Number
-        </Text>
+        <Text style={styles.textName}>Phone Number</Text>
         <TextInput
-          style={{ marginRight: 20, marginBottom: 10 }}
+          style={styles.textInput}
           placeholderTextColor="#aaaaaa"
           placeholder="+233 248206239"
           secureTextEntry={true}
         />
       </View>
 
-      <View
-        style={{
-          backgroundColor: "#e6e7e8",
-          height: 2,
-          width: 330,
-          marginBottom: 20,
-          marginLeft: 15,
-        }}
-      ></View>
+      <View style={styles.line}></View>
 
       <View
         style={{
@@ -109,26 +128,16 @@ export default function RegisterScreen({ route, navigation }) {
           justifyContent: "space-between",
         }}
       >
-        <Text style={{ fontWeight: "bold", marginBottom: 10, marginLeft: 15 }}>
-          Role
-        </Text>
+        <Text style={styles.textName}>Role</Text>
         <TextInput
-          style={{ marginRight: 20, marginBottom: 10 }}
+          style={styles.textInput}
           placeholderTextColor="#aaaaaa"
           placeholder="Developer"
           secureTextEntry={true}
         />
       </View>
 
-      <View
-        style={{
-          backgroundColor: "#e6e7e8",
-          height: 2,
-          width: 330,
-          marginBottom: 20,
-          marginLeft: 15,
-        }}
-      ></View>
+      <View style={styles.line}></View>
 
       <View
         style={{
@@ -137,26 +146,16 @@ export default function RegisterScreen({ route, navigation }) {
           justifyContent: "space-between",
         }}
       >
-        <Text style={{ fontWeight: "bold", marginBottom: 10, marginLeft: 15 }}>
-          Twitter
-        </Text>
+        <Text style={styles.textName}>Twitter</Text>
         <TextInput
-          style={{ marginRight: 20, marginBottom: 10, marginLeft: 15 }}
+          style={styles.textInput}
           placeholderTextColor="#aaaaaa"
           placeholder="@florentpop"
           secureTextEntry={true}
         />
       </View>
 
-      <View
-        style={{
-          backgroundColor: "#e6e7e8",
-          height: 2,
-          width: 330,
-          marginBottom: 20,
-          marginLeft: 15,
-        }}
-      ></View>
+      <View style={styles.line}></View>
 
       <View
         style={{
@@ -165,35 +164,25 @@ export default function RegisterScreen({ route, navigation }) {
           justifyContent: "space-between",
         }}
       >
-        <Text style={{ fontWeight: "bold", marginBottom: 10, marginLeft: 15 }}>
-          LinkedIn
-        </Text>
+        <Text style={styles.textName}>LinkedIn</Text>
         <TextInput
-          style={{ marginRight: 20, marginBottom: 10 }}
+          style={styles.textInput}
           placeholderTextColor="#aaaaaa"
           placeholder="/florent francis"
           secureTextEntry={true}
         />
       </View>
 
-      <View
-        style={{
-          backgroundColor: "#e6e7e8",
-          height: 2,
-          width: 330,
-          marginBottom: 20,
-          marginLeft: 15,
-        }}
-      ></View>
+      <View style={styles.line}></View>
 
-      <View style={styles.footer}>
+      <View style={styles.regBtn}>
         <TouchableOpacity
           onPress={() => {
             navigation.navigate("ScanScreen");
           }}
-          style={styles.buttonContainer}
+          style={styles.regButton}
         >
-          <Text style={styles.buttonText}>REGISTER</Text>
+          <Text style={styles.regText}>REGISTER</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
@@ -201,38 +190,54 @@ export default function RegisterScreen({ route, navigation }) {
 }
 
 const styles = StyleSheet.create({
-  mainContainer: {
+  container: {
     flex: 1,
-    // justifyContent: "space-around"
   },
-  heading: {
-    flexDirection: "row",
-    backgroundColor: "#de4f45",
-    height: 70,
-    justifyContent: "space-around",
+
+  frame: {
+    height: 200,
+    width: 250,
+    marginLeft: 50,
+    marginBottom: 20,
+    justifyContent: "center",
     alignItems: "center",
   },
 
   image: {
     height: 190,
     width: "100%",
-    // flex: 0.5,
     marginBottom: 15,
   },
-  buttonContainer: {
+  regButton: {
     height: 40,
     width: 320,
-    backgroundColor: "#de4f45",
+    backgroundColor: "#d21f3c",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 3,
     marginLeft: 20,
   },
-  buttonText: {
+  regText: {
     color: "white",
     fontSize: 15,
   },
-  footer: {
+  regBtn: {
     marginBottom: 50,
+  },
+  textName: {
+    marginBottom: 10,
+    marginLeft: 15,
+  },
+  line: {
+    backgroundColor: "#e6e7e8",
+    height: 1.5,
+    width: 330,
+    marginBottom: 20,
+    marginLeft: 15,
+  },
+  textInput: {
+    marginRight: 20,
+    marginBottom: 10,
+    textAlign: "right",
   },
 });

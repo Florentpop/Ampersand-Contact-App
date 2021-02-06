@@ -7,80 +7,31 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
 
 export default function LogInScreen({ route, navigation }) {
   let LogInScreen = route.params;
   return (
-    <View style={styles.mainContainer}>
-      <Image source={require("../../assets/office.jpg")} style={styles.image} />
+    <View style={styles.container}>
+      <Image source={require("../../assets/office.jpg")} style={styles.photo} />
 
-      <Text
-        style={{
-          fontSize: 15,
-          color: "#ab3d35",
-          marginLeft: 10,
-          marginBottom: 20,
-        }}
-      >
-        Email or Password is incorrect check and try again
-      </Text>
-
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
-        <Text
-          style={{
-            fontWeight: "bold",
-            fontSize: 15,
-            marginLeft: 15,
-            marginBottom: 10,
-          }}
-        >
-          Email
-        </Text>
+      <View style={styles.text}>
+        <Text style={styles.textName}>Email</Text>
         <TextInput
-          style={{ marginRight: 20, marginBottom: 10 }}
+          style={styles.textInput}
           placeholderTextColor="#aaaaaa"
           placeholder="florentpop@gmail.com"
+          keyboardType="email-address"
         />
       </View>
 
-      <View
-        style={{
-          backgroundColor: "#e6e7e8",
-          height: 2,
-          width: 330,
-          marginBottom: 10,
-          marginLeft: 15,
-        }}
-      ></View>
+      <View style={styles.line}></View>
 
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
-        <Text
-          style={{
-            fontWeight: "bold",
-            fontSize: 15,
-            marginLeft: 15,
-            marginBottom: 35,
-          }}
-        >
-          Password
-        </Text>
+      <View style={styles.text}>
+        <Text style={styles.textName}>Password</Text>
         <TextInput
-          style={{ marginRight: 20, marginBottom: 35 }}
+          style={styles.textInput}
           placeholderTextColor="#aaaaaa"
-          placeholder="Password"
+          placeholder="Password "
           secureTextEntry={true}
         />
       </View>
@@ -90,22 +41,25 @@ export default function LogInScreen({ route, navigation }) {
           onPress={() => {
             navigation.navigate("ScanScreen");
           }}
-          style={styles.buttonContainer}
+          style={styles.signInButton}
         >
-          <Text style={styles.buttonText}>SIGN IN</Text>
+          <Text style={styles.signInText}>SIGN IN</Text>
         </TouchableOpacity>
       </View>
 
       <View>
-        <View style={styles.forgotPassword}>
+        <View style={styles.resetPassword}>
           <Text style={{ fontSize: 15 }}>Forgot? </Text>
           <View>
-            <Text style={{ fontSize: 15, marginBottom: 5 }}>
-              Reset Password
-            </Text>
+            <TouchableOpacity>
+              <Text style={{ fontSize: 15, marginBottom: 5 }}>
+                Reset Password
+              </Text>
+            </TouchableOpacity>
+
             <View
               style={{
-                backgroundColor: "#de4f45",
+                backgroundColor: "#d21f3c",
                 height: 2,
                 width: 107,
                 borderRadius: 15,
@@ -119,41 +73,56 @@ export default function LogInScreen({ route, navigation }) {
 }
 
 const styles = StyleSheet.create({
-  mainContainer: {
+  container: {
     flex: 1,
-    // marginTop: 25,
-    // justifyContent: "space-around"
-  },
-  heading: {
-    flexDirection: "row",
-    backgroundColor: "#de4f45",
-    height: 70,
-    justifyContent: "space-around",
-    alignItems: "center",
+    backgroundColor: "white",
   },
 
-  image: {
+  photo: {
     height: 400,
     width: "100%",
-    flex: 0.8,
+    flex: 0.7,
     marginBottom: 50,
   },
-  buttonContainer: {
+  signInButton: {
     height: 40,
     width: 320,
-    backgroundColor: "#de4f45",
+    backgroundColor: "#d21f3c",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 3,
     marginLeft: 20,
     marginBottom: 40,
   },
-  buttonText: {
+  signInText: {
     color: "white",
     fontSize: 15,
   },
-  forgotPassword: {
+  resetPassword: {
     flexDirection: "row",
     marginLeft: 20,
+  },
+
+  text: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  textName: {
+    fontSize: 15,
+    marginLeft: 15,
+    marginBottom: 35,
+  },
+  line: {
+    backgroundColor: "#e6e7e8",
+    height: 1.5,
+    width: 330,
+    marginBottom: 5,
+    marginLeft: 15,
+  },
+  textInput: {
+    marginRight: 20,
+    marginBottom: 10,
+    textAlign: "right",
   },
 });

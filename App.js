@@ -1,7 +1,7 @@
 import React from "react";
 import { TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import FirstScreen from "./src/screens/FirstScreen";
+import WelcomeScreen from "./src/screens/WelcomeScreen";
 import GetStartedScreen from "./src/screens/GetStartedScreen";
 import LogInScreen from "./src/screens/LogInScreen";
 import RegisterScreen from "./src/screens/RegisterScreen";
@@ -29,8 +29,8 @@ export default function App() {
           options={{
             header: () => null,
           }}
-          name="FirstScreen"
-          component={FirstScreen}
+          name="WelcomeScreen"
+          component={WelcomeScreen}
         />
 
         <Stack.Screen
@@ -52,7 +52,7 @@ export default function App() {
           options={{
             title: "SIGN IN",
             headerStyle: {
-              backgroundColor: "#de4f45",
+              backgroundColor: "#d21f3c",
             },
             headerTintColor: "white",
             headerTitleAlign: "center",
@@ -66,7 +66,7 @@ export default function App() {
             // header: () => null
             title: "REGISTER",
             headerStyle: {
-              backgroundColor: "#de4f45",
+              backgroundColor: "#d21f3c",
             },
             headerTintColor: "white",
             headerTitleAlign: "center",
@@ -79,7 +79,7 @@ export default function App() {
           options={({ route, navigation }) => ({
             title: "QR CODE",
             headerStyle: {
-              backgroundColor: "#de4f45",
+              backgroundColor: "#d21f3c",
             },
             headerTintColor: "white",
             headerTitleAlign: "center",
