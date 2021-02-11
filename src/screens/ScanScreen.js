@@ -1,6 +1,5 @@
 import React from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
-import { SimpleLineIcons, AntDesign } from "@expo/vector-icons";
 import { QRCode } from "react-native-custom-qr-codes-expo";
 
 export default function ScanScreen({ route, navigation }) {
@@ -21,9 +20,21 @@ export default function ScanScreen({ route, navigation }) {
         <Text
           style={{
             fontSize: 15,
+            color: "grey",
+            marginRight: 60,
           }}
         >
-          Scan this QR below to share your contacts
+          Scan this QR below to share your
+        </Text>
+        <Text
+          style={{
+            fontSize: 15,
+            color: "grey",
+            //textAlign: "left",
+            marginRight: 220,
+          }}
+        >
+          contacts
         </Text>
       </View>
 
@@ -35,7 +46,9 @@ export default function ScanScreen({ route, navigation }) {
         <Image source={require("../../assets/dp.jpeg")} style={styles.dp} />
         <View style={styles.infoDp}>
           <Text style={{ fontWeight: "bold", fontSize: 18 }}>Kofi Ansah</Text>
-          <Text style={{ fontWeight: "400", fontSize: 15 }}>Technician</Text>
+          <Text style={{ fontWeight: "400", fontSize: 15, color: "grey" }}>
+            Technician
+          </Text>
         </View>
       </View>
 
@@ -44,7 +57,6 @@ export default function ScanScreen({ route, navigation }) {
           style={{
             backgroundColor: "#b2b9bf",
             height: 2,
-            //  width: 360, marginBottom: 30
           }}
         ></View>
         <View style={styles.footer}>

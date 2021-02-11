@@ -11,8 +11,10 @@ import {
   Button,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
+import Icon from "react-native-vector-icons/AntDesign";
+import { connect } from "react-redux";
 
-export default function RegisterScreen({ route, navigation }) {
+function RegisterScreen({ route, navigation }) {
   let RegisterScreen = route.params;
 
   const [image, setImage] = useState(null);
@@ -47,26 +49,17 @@ export default function RegisterScreen({ route, navigation }) {
 
   return (
     <ScrollView style={styles.container}>
-      <View
-        style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-        style={styles.frame}
-      >
-        <Button
+      <ImageBackground style={styles.frame} source={{ uri: image }}>
+        <Icon
+          name="user"
+          size={50}
+          color="red"
           title="Pick from Image Library"
           onPress={pickImage}
-          style={styles.image}
+          style={styles.icon}
         />
-        {image && (
-          <Image
-            source={{ uri: image }}
-            style={{
-              width: 150,
-              height: 150,
-              borderRadius: 75,
-            }}
-          />
-        )}
-      </View>
+        <Text style={{ color: "red" }}> ADD PROFILE PHOTO </Text>
+      </ImageBackground>
 
       <View
         style={{
@@ -196,11 +189,11 @@ const styles = StyleSheet.create({
 
   frame: {
     height: 200,
-    width: 250,
-    marginLeft: 50,
+    width: "100%",
     marginBottom: 20,
     justifyContent: "center",
     alignItems: "center",
+    // backgroundColor: "red",
   },
 
   image: {
@@ -241,3 +234,5 @@ const styles = StyleSheet.create({
     textAlign: "right",
   },
 });
+
+export default RegisterScreen;

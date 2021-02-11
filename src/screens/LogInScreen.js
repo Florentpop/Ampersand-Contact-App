@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
+import { connect } from "react-redux";
 
 export default function LogInScreen({ route, navigation }) {
   let LogInScreen = route.params;
